@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useDelete } from '../../../hooks/useDelete';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function DeletePopup({ onClose, selectedUser }) 
 {
@@ -9,7 +10,7 @@ function DeletePopup({ onClose, selectedUser })
 
     const handleSubmit = async () => {
         const id = selectedUser;
-        const response = await deleteData('http://localhost:5000/api/users/deleteStaff', id)
+        const response = await deleteData(`${apiUrl}/api/users/deleteStaff`, id)
         if (response !== null) { alert('Data deleted succesfully'); onClose(); }
     }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useEdit } from '../../../hooks/useEdit';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function EditPopup({ onClose, selectedUser }) 
 {
@@ -23,7 +24,7 @@ function EditPopup({ onClose, selectedUser })
 
     const handleSubmit = async () => {
         if (!formData.staffId || !formData.fullName || !formData.password) return alert('Fill all the fields');
-        const data = await editData('http://localhost:5000/api/users/editStaff', formData);
+        const data = await editData(`${apiUrl}/api/users/editStaff`, formData);
         if (data !== null) { alert('Data updated sucessfully'); onClose() }
     }
 

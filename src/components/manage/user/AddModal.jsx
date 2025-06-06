@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useAdd } from '../../../hooks/useAdd';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function AddPopup({ onSuccess }) 
 {
     const [formData, setFormData] = useState({ staffId: '', fullName: '', password: '' });
 
-    const apiUrl = 'http://localhost:5000/api/users/addStaff'
+    const Url = `${apiUrl}/api/users/addStaff`
 
     const { addData, loading, error } = useAdd(); 
 
@@ -19,7 +20,7 @@ function AddPopup({ onSuccess })
         if (!formData.staffId || !formData.fullName || !formData.password) {
             alert('Fill all the fields'); return false;
         }
-        const data = await addData(apiUrl, formData);
+        const data = await addData(Url, formData);
         if (data) { alert('User Added Sucessfully'); onSuccess() }
     } 
 

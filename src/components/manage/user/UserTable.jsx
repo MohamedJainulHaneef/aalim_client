@@ -4,6 +4,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useFetch } from '../../../hooks/useFetch';
 import EditPopup from './EditPopup';
 import DeletePopup from './DeletePopup';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function UserTable() 
 {
@@ -23,7 +24,7 @@ function UserTable()
         setSelectedUser(id);
     }
 
-    useEffect(() => { fetchData('http://localhost:5000/api/users/fetchStaff') }, [])
+    useEffect(() => { fetchData(`${apiUrl}/api/users/fetchStaff`) }, [])
 
     return (
         <>
@@ -72,11 +73,11 @@ function UserTable()
                 </table>
             )}
             {isEditPopupOpen && <EditPopup
-                onClose={() => { setIsEditModalOpen(false); fetchData('http://localhost:5000/api/users/fetchStaff') }}
+                onClose={() => { setIsEditModalOpen(false); fetchData(`${apiUrl}/api/users/fetchStaff`) }}
                 selectedUser={selectedUser}
             />}
             {isDeletePopupOpen && <DeletePopup
-                onClose={() => { setIsDeleteModalOpen(false); fetchData('http://localhost:5000/api/users/fetchStaff') }}
+                onClose={() => { setIsDeleteModalOpen(false); fetchData(`${apiUrl}/api/users/fetchStaff`) }}
                 selectedUser={selectedUser} 
             />}
         </>
