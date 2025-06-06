@@ -16,11 +16,7 @@ function Home()
         fetchData('http://localhost:5000/api/timeTable/staffClass', { staffId })
     }, [staffId]);
 
-    const handleButtonClick = (details) => {
-        navigate(`/layout/${staffId}/classAttendance`, { state: {
-            studentYear: details.year
-        }})
-    }
+    const handleButtonClick = (details) => { navigate(`/layout/${staffId}/classAttendance`, { state: { studentYear: details.year }}) }
 
     return (
         <div className='p-4'>
@@ -32,7 +28,7 @@ function Home()
             {error && (<div className="text-center py-4 text-red-500 font-semibold"> Error : {error} </div>)}
             {!loading && !error && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-6">
-                    {data.classes && data.classes.length > 0 ? (
+                    {data.classes && data.classes.length == 0 ? (
                         data.classes.map((details, index) => (
                             <button
                                 key={index} onClick={() => handleButtonClick(details)}
@@ -83,7 +79,7 @@ function Home()
                             </button>
                         ))
                     ) : (
-                        <p className="text-center text-gray-600 mt-6">No classes found.</p>
+                        <p className="text-center w-full bg-red-500 text-gray-600 mt-6">No classes found.</p>
                     )}
                 </div>
             )}

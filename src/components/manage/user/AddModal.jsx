@@ -19,25 +19,23 @@ function AddPopup({ onSuccess })
         if (!formData.staffId || !formData.fullName || !formData.password) {
             alert('Fill all the fields'); return false;
         }
-        const data = await addData(formData, apiUrl);
-        if (data) {
-            alert('User Added Sucessfully'); onSuccess();
-        }
+        const data = await addData(apiUrl, formData);
+        if (data) { alert('User Added Sucessfully'); onSuccess() }
     } 
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-xl w-full mt-2 mb-4">
-            <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">Add New User</h2>
-            {error && <span className='text-red-600 mb-5 block'>{error}</span>}
-            <div className="grid grid-cols-1 gap-4">
+        <div className="bg-white p-6 rounded-lg shadow-xl w-full mt-1 mb-4">
+            <h2 className="text-xl font-semibold text-blue-700 text-center border-b pb-3 mb-6">Add New User</h2>
+            {error && <span className='text-red-600 mb-6 block'>{error}</span>}
+            <div className="grid grid-cols-1 gap-6">
                 <input
                     autoComplete='off'
                     type="text"
-                    value={formData.staffId}
+                    value={formData.staffId} 
                     name='staffId'
                     placeholder="User Id"
                     onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
                 <input
                     autoComplete='off'
@@ -46,7 +44,7 @@ function AddPopup({ onSuccess })
                     placeholder="Full Name"
                     name='fullName'
                     onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
                 <input
                     autoComplete='off'
@@ -55,7 +53,7 @@ function AddPopup({ onSuccess })
                     name='password'
                     placeholder="Password"
                     onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
                 <div className='flex justify-between gap-5'>
                     <button onClick={onSuccess}

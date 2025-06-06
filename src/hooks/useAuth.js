@@ -7,9 +7,7 @@ export const useAuth = () => {
     const [error, setError] = useState(null);
 
     const loginUser = async (staffId, password) => {
-        
         setLoading(true); setError(null);
-        
         try {
             const data = await login(staffId, password);
             setLoading(false); return data;

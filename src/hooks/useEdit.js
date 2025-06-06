@@ -7,9 +7,7 @@ export const useEdit = () => {
     const [error, setError] = useState(null);
 
     const editData = async (apiUrl, formData) => {
-
         setLoading(true); setError(false);
-
         try { 
             await EditDataAPI(apiUrl, formData) 
             setLoading(false); return;

@@ -6,12 +6,10 @@ export const useAdd = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const addData = async (formData, apiUrl) => { 
-
+    const addData = async (apiUrl, formData) => { 
         setLoading(true); setError(null);
-
         try {
-            const data = await addDataAPI(formData, apiUrl);
+            const data = await addDataAPI(apiUrl, formData);
             setLoading(false); return data;
         } catch (error) {
             setError(error.response?.data?.message || 'Error occurred');

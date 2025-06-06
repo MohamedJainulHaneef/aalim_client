@@ -9,6 +9,7 @@ import Attendance from './pages/Attendance';
 import Leave from './pages/manage/Leave';
 import Academic from './pages/manage/Academic';
 import Substitution from './pages/manage/Substitution';
+import FileUpload from './pages/FileUpload';
 
 const App = () => 
 {
@@ -22,6 +23,7 @@ const App = () =>
 				<Route path=':staffId/profile' element={<Report />} />
 				<Route path=':staffId/academicManagement' element={<Academic />} />
 				<Route path=':staffId/userManagement' element={<User />} />
+				<Route path=':staffId/fileUpload' element={<FileUpload />} />
 				<Route path=':staffId/leaveManagement' element={<Leave />} />
 				<Route path=':staffId/substitutionManagement' element={<Substitution />} />
 			</Route>

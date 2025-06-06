@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-export const addDataAPI = async (formData, apiUrl) => {
+export const addDataAPI = async (apiUrl, formData) => {
     const response = await axios.post(`${apiUrl}`, formData);
     return response.data;
 }
 
-export const fetchDataAPI = async (apiUrl, data) => {
-    const response = await axios.post(`${apiUrl}`, data )
+export const fetchDataAPI = async (apiUrl, formData) => {
+    // console.log('Hello')
+    const response = await axios.post(`${apiUrl}`, formData )
     return response.data;
 }
 
