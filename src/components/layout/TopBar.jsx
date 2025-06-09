@@ -1,18 +1,22 @@
 import React from 'react';
 import { Menu, LogOut } from 'lucide-react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, matchPath } from 'react-router-dom';
 
 function Topbar({ onClick }) 
 {
-    const location = useLocation();
+    const location = useLocation(); 
 
     const menuNames = {
-        '/layout/home' : 'Home',
-        '/layout/profile' : 'Profile',
-        '/layout/usermanagement' : 'User Management',
+        '/layout/:staffId/home': 'Home',
+        '/layout/report': 'Report',
+        '/layout/usermanagement': 'User Management',
+    };
+
+    let currentMenu = 'Menu';
+
+    for (const path in menuNames) {
+        if (matchPath({ path, end: true }, location.pathname)) { currentMenu = menuNames[path]; break }
     }
-    
-    const currentMenu = menuNames[location.pathname] || 'Menu';
 
     return (
         <div className='py-2 px-3 flex flex-row items-center justify-between bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600'>

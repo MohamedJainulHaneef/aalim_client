@@ -50,7 +50,7 @@ const LoginForm = () =>
                     <input
                         type="text"
                         className="w-full bg-transparent outline-none placeholder:text-gray-600 placeholder:text-md text-black lg:text-md"
-                        placeholder="USER ID"
+                        placeholder="USERNAME"
                         onChange={(e) => setStaffId(e.target.value)}
                         required
                     />

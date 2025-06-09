@@ -6,7 +6,7 @@ export const useAdd = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const addData = async (apiUrl, formData) => { 
+    const addData = async (apiUrl, formData) => {
         setLoading(true); setError(null);
         try {
             const data = await addDataAPI(apiUrl, formData);

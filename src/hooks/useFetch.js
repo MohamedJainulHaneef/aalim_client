@@ -11,8 +11,7 @@ export const useFetch = () => {
         setLoading(true); setError(null); 
         try {
             const response = await fetchDataAPI(url, data);
-            setLoading(false); setData(response);
-            return response;
+            setLoading(false); setData(response); return response;
         } catch (error) {
             setError(error.message || 'Error Occured');
             setLoading(false); return null

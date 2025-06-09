@@ -20,13 +20,13 @@ const App = () =>
 				<Route index element={<Navigate to=':staffId/home' replace />} />
 				<Route path=':staffId/home' element={<Home />} />
 				<Route path=':staffId/classAttendance' element={<Attendance />} />
-				<Route path=':staffId/profile' element={<Report />} />
+				<Route path=':staffId/report' element={<Report />} />
 				<Route path=':staffId/academicManagement' element={<Academic />} />
 				<Route path=':staffId/userManagement' element={<User />} />
 				<Route path=':staffId/fileUpload' element={<FileUpload />} />
 				<Route path=':staffId/leaveManagement' element={<Leave />} />
 				<Route path=':staffId/substitutionManagement' element={<Substitution />} />
-			</Route>
+			</Route>                  
 		</Routes>
 	);
 }; 
