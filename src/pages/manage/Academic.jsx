@@ -21,7 +21,7 @@ function Academic()
             {isAddModalOpen && ( 
                 <div className="flex justify-center"> <AddModal onSuccess={() => setIsAddModalOpen(false)}/> </div> )
             }
-           {!isAddModalOpen &&  <UserTable />}
+           {/* {!isAddModalOpen &&  <UserTable />} */}
         </div>
     );
 }
