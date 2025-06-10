@@ -23,7 +23,7 @@ function Attendance()
 		fetchData(`${apiUrl}/api/attendance/studentsInfo`, { studentYear, session, formattedDate, staffId });
 	}, [studentYear, session, staffId]);
 
-	useEffect(() => { if (data && Array.isArray(data)) { setFormData(data); console.log(formData) } }, [data]);
+	useEffect(() => { if (data && Array.isArray(data)) { setFormData(data)} }, [data]);
 
 	const [columns, setColumns] = useState({
 		sno: true, reg: true, roll: true, name: false, present: false, absent: false,
@@ -42,7 +42,6 @@ function Attendance()
 			record: formData.map(({ roll_no, status }) => ({ roll_no, status }))
 		}
 		const response = await addData(`${apiUrl}/api/attendance/saveInfo`, finalData);
-		console.log(response)
 		if(response != null) { alert('Data saved successfully')}
 	}
 

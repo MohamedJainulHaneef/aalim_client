@@ -16,15 +16,12 @@ function SideBar({ onClose })
             name: 'Home',
             path: `/layout/${staffId}/home`,
             icon: faHome,
-        },
-        {
-            name: 'File Upload',
-            path: `/layout/${staffId}/fileUpload`,
-            icon: faUpload,
+            show: true
         },
         {
             name: 'Manage',
             icon: faUserGear,
+            show: staffId === 'ADMIN',
             subItems: [
                 { name: 'Substitution Management', path: `/layout/${staffId}/substitutionManagement` },
                 { name: 'User Management', path: `/layout/${staffId}/userManagement` },
@@ -34,14 +31,23 @@ function SideBar({ onClose })
             ]
         },
         {
+            name: 'File Upload',
+            path: `/layout/${staffId}/fileUpload`,
+            icon: faUpload,
+            show: staffId === 'ADMIN'
+        },
+        
+        {
             name: 'Report',
             path: `/layout/${staffId}/report`,
             icon: faChartSimple,
+            show: staffId === 'ADMIN'
         },
         {
             name: 'Logout',
             path: '/',
             icon: faRightFromBracket,
+            show: true
         },
     ];
 
@@ -128,7 +134,9 @@ function SideBar({ onClose })
                 <img src={Login} alt="Profile" className="w-16 h-16 rounded-full" />
                 <span className="text-white font-semibold text-md uppercase">{staffId}</span>
             </div>
-            <nav className="mt-5 flex flex-col gap-3"> {navItems.map(renderNavItem)} </nav>
+            <nav className="mt-5 flex flex-col gap-3">
+                {navItems.filter(item => item.show).map(renderNavItem)}
+            </nav>
         </div>
     )
 }

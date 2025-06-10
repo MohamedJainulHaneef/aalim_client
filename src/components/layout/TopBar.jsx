@@ -9,7 +9,7 @@ function Topbar({ onClick })
     const menuNames = {
         '/layout/:staffId/home': 'Home',
         '/layout/report': 'Report',
-        '/layout/usermanagement': 'User Management',
+        '/layout/usermanagement': 'User Management', 
     };
 
     let currentMenu = 'Menu';

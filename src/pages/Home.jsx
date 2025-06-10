@@ -75,7 +75,6 @@ function Home()
                                         {details.year}
                                     </span>
                                 </div>
-
                                 <div className="bg-white rounded-lg p-3">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-1">
@@ -87,7 +86,7 @@ function Home()
                                         <div
                                             className={`text-white px-3 py-1 rounded-md text-xs font-semibold ${index % 2 === 0 ? 'bg-indigo-700' : 'bg-blue-600' }`}
                                         >
-                                            {details.semester}
+                                            {details.semester} - {details.session_1 ? 'I Hour' : 'II Hour'}
                                         </div>
                                     </div>
                                     <div className="flex justify-center gap-8 px-10 mt-4 bg-white rounded-lg shadow-md max-w-md mx-auto">
@@ -97,7 +96,7 @@ function Home()
                                             >
                                                 Total
                                             </p>
-                                            <p className="mt-2 text-lg font-bold text-orange-600">60</p>
+                                            <p className="mt-2 text-lg font-bold text-orange-600">{details.total}</p>
                                         </div>
                                         <div className="flex flex-col items-center py-2 flex-1">
                                             <p
@@ -105,7 +104,7 @@ function Home()
                                             >
                                                 Present
                                             </p>
-                                            <p className="mt-2 text-lg font-bold text-green-600">40</p>
+                                            <p className="mt-2 text-lg font-bold text-green-600">{details.presentees}</p>
                                         </div>
                                         <div className="flex flex-col items-center py-2 flex-1">
                                             <p
@@ -113,7 +112,7 @@ function Home()
                                             >
                                                 Absent
                                             </p>
-                                            <p className="mt-2 text-lg font-bold text-red-600">20</p>
+                                            <p className="mt-2 text-lg font-bold text-red-600">{details.absentees}</p>
                                         </div>
                                     </div>
                                 </div>

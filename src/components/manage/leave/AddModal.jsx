@@ -13,7 +13,7 @@ function AddModal({ onSuccess })
     const buttonObject1 = { name: "Cancel", icon: faClose, design: "bg-gray-400 hover:bg-gray-500 w-full" };
     const buttonObject2 = { name: loading ? 'Saving' : 'Save', icon: faSave, design: "bg-blue-500 hover:bg-blue-600 w-full" };
 
-    const [data, setData] = useState({ leaveFromDate: '', leaveToDate: ''});
+    const [data, setData] = useState({ leaveFromDate: '', leaveToDate: '', reason:''});
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -47,6 +47,16 @@ function AddModal({ onSuccess })
                         name='leaveToDate'
                         onChange={handleChange}
                         value={data.leaveToDate}
+                        className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    />
+                </div>
+                <div className="space-y-2.5">
+                    <label className="block text-sm font-medium text-gray-600">Reason</label>
+                    <input
+                        type="text"
+                        name='reason'
+                        onChange={handleChange}
+                        value={data.reason}
                         className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                     />
                 </div>

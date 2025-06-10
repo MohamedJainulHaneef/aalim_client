@@ -28,18 +28,15 @@ const LoginForm = () =>
     }
 
     return (
-        <div className="min-h-screen flex flex-col justify-center bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-600 px-8 pb-20 lg:flex-row lg:gap-16 lg:justify-center lg:items-center lg:pb-0">
-            <div className="flex flex-row items-center mb-5 lg:flex-col lg:gap-4">
-                <img src={JmcLogo} alt="LOGO" className="w-24 h-24 lg:w-60 lg:h-60" />
-                <div className="text-center text-white">
-                    <p className="text-md font-bold lg:text-lg">JAMAL MOHAMED COLLEGE</p>
-                    <p className="text-md font-bold lg:text-lg">(AUTONOMOUS)</p>
-                    <p className="text-md font-bold lg:text-lg">TIRUCHIRAPPALLI - 620 020 .</p>
-                </div>
+        <div className="min-h-screen flex flex-col justify-center bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-600 px-8 pb-20 lg:pb-0 gap-5 lg:items-center">
+            <div className="text-center text-white">
+                <p className="text-md font-bold lg:text-lg">PG DEPARTMENT OF ARABIC</p>
+                <p className="text-md font-bold lg:text-lg">JAMAL MOHAMED COLLEGE</p>
+                <p className="text-md font-bold lg:text-lg">TIRUCHIRAPPALLI - 620 020 .</p>
             </div>
             <div className="rounded-2xl shadow-lg text-black bg-white py-6 px-6 lg:max-h-fit lg:py-10 lg:px-10">
-                <h1 className="text-md font-bold text-center font-serif mb-6 lg:text-2xl lg:mb-8">
-                    LOGIN TO YOUR ACCOUNT
+                <h1 className="text-md font-bold text-center mb-6 lg:text-xl lg:mb-8">
+                    AALIM SANAD ATTENDANCE
                 </h1>
                 <p className="text-xs text-gray-800 text-center mb-7 lg:text-lg">
                     Enter your Credentials to Access the Platform.
@@ -49,9 +46,9 @@ const LoginForm = () =>
                     <FontAwesomeIcon icon={faUser} className="text-gray-600 mr-2 text-sm lg:text-lg" />
                     <input
                         type="text"
-                        className="w-full bg-transparent outline-none placeholder:text-gray-600 placeholder:text-md text-black lg:text-md"
+                        className="w-full bg-transparent uppercase outline-none placeholder:text-gray-600 placeholder:text-md text-black lg:text-md"
                         placeholder="USERNAME"
-                        onChange={(e) => setStaffId(e.target.value)}
+                        onChange={(e) => setStaffId(e.target.value.toUpperCase())}
                         required
                     />
                 </div>
