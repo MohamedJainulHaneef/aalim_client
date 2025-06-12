@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddModal from '../../components/manage/substitution/AddModal';
-import UserTable from '../../components/manage/user/UserTable';
+import SubstitutionTable from '../../components/manage/substitution/SubstitutionTable';
 
 function Substitution() 
 {
@@ -21,6 +21,7 @@ function Substitution()
             {isAddModalOpen && ( 
                 <div className="flex justify-center"> <AddModal onSuccess={() => setIsAddModalOpen(false)}/> </div> )
             }
+           {!isAddModalOpen &&  <SubstitutionTable />}
         </div>
     );
 }

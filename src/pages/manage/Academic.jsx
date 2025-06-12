@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddModal from '../../components/manage/academic/AddModal';
-import UserTable from '../../components/manage/user/UserTable';
+import AcademicTable from '../../components/manage/academic/AcademicTable';
 
 function Academic() 
 {
@@ -21,7 +21,7 @@ function Academic()
             {isAddModalOpen && ( 
                 <div className="flex justify-center"> <AddModal onSuccess={() => setIsAddModalOpen(false)}/> </div> )
             }
-           {/* {!isAddModalOpen &&  <UserTable />} */}
+           {!isAddModalOpen &&  <AcademicTable />}
         </div>
     );
 }

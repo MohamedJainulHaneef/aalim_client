@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddModal from '../../components/manage/leave/AddModal';
-import UserTable from '../../components/manage/user/UserTable';
+import LeaveTable from '../../components/manage/leave/LeaveTable';
 
 function Leave() 
 {
@@ -23,7 +23,7 @@ function Leave()
             {isAddModalOpen && ( 
                 <div className="flex justify-center"> <AddModal onSuccess={() => setIsAddModalOpen(false)}/> </div> )
             }
-           {/* {!isAddModalOpen &&  <UserTable />} */}
+           {!isAddModalOpen &&  <LeaveTable />}
         </div>
     );
 }

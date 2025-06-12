@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import Button from '../../common/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faClose } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +12,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 function AddModal({ onSuccess }) 
 {
     const { error: addError, loading: addLoading, addData } = useAdd();
+    const [staffName, setStaffName] = useState('');
     const { error: fetchError, loading: fetchLoading, fetchData, data } = useFetch();
 
     const buttonObject1 = { name: "Cancel", icon: faClose, design: "bg-gray-400 hover:bg-gray-500 w-full" };
@@ -22,9 +24,19 @@ function AddModal({ onSuccess })
 
     useEffect(() => { fetchData(`${apiUrl}/api/substitution/StaffInfo`) }, []);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    useEffect(() => {
+        if (formData.date && formData.year && formData.session) {
+            fetchSubstitutionStaffId();
+        }
+    }, [formData.date, formData.year, formData.session]);
+
+    const fetchSubstitutionStaffId = async () => {
+        const response = await axios.post(`${apiUrl}/api/substitution/StaffId`, formData);
+        setStaffName(response.data);
+        setFormData((prevData) => ({ ...prevData, absentStaffId: response.data }));
+    };
+
+    const handleChange = async (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }) }
 
     const handleSave = async () => {
         const { date, year, session, absentStaffId, replacementStaffId } = formData;
@@ -63,7 +75,6 @@ function AddModal({ onSuccess })
                         <option>III Year</option>
                         <option>IV Year</option>
                         <option>V Year</option>
-                        <option>VI Year</option>
                     </select>
                 </div>
                 <div className="space-y-2.5">
@@ -81,15 +92,14 @@ function AddModal({ onSuccess })
                 </div>
                 <div className="space-y-2.5">
                     <label className="block text-sm font-medium text-gray-600">Absent Staff</label>
-                    <select
+                    <input
+                        type="text"
                         name='absentStaffId'
                         onChange={handleChange}
-                        value={formData.absentStaffId}
-                        className="w-full h-10 p-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-                    >
-                        <option>Select</option>
-                        {data.map((details) => (<option key={details.staffId}>{details.staffId}</option>))}
-                    </select>
+                        readOnly
+                        value={staffName || ''}
+                        className="w-full h-9.5 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    />
                 </div>
                 <div className="space-y-2.5">
                     <label className="block text-sm font-medium text-gray-600">Replacement Staff</label>

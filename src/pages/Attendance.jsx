@@ -23,26 +23,47 @@ function Attendance()
 		fetchData(`${apiUrl}/api/attendance/studentsInfo`, { studentYear, session, formattedDate, staffId });
 	}, [studentYear, session, staffId]);
 
-	useEffect(() => { if (data && Array.isArray(data)) { setFormData(data)} }, [data]);
+	useEffect(() => { if (data && Array.isArray(data)) { setFormData(data) } }, [data]);
+
+	useEffect(() => { setColumns((prev) => ({ ...prev, present: true })) }, []);
 
 	const [columns, setColumns] = useState({
 		sno: true, reg: true, roll: true, name: false, present: false, absent: false,
 	});
 
 	const handleCheckboxChange = (key) => {
-		setColumns((prev) => ({ ...prev, [key]: !prev[key] }))
+		setColumns((prev) => {
+			const newColumns = { ...prev };
+			if (key === 'present') {
+				setFormData((prevData) => prevData.map((student) => ({ ...student, status: true })));
+				newColumns.present = true; newColumns.absent = false;
+			} else if (key === 'absent') {
+				setFormData((prevData) => prevData.map((student) => ({ ...student, status: false })));
+				newColumns.present = false; newColumns.absent = true;
+			} else { newColumns[key] = !prev[key] }
+			return newColumns
+		})
 	};
 
 	const toggleAttendance = (roll_no) => {
-		setFormData((prev) => prev.map((student) => student.roll_no === roll_no ? { ...student, status: !student.status } : student))
+		setFormData((prev) => {
+			const updated = prev.map((student) =>
+				student.roll_no === roll_no ? { ...student, status: !student.status } : student
+			);
+			const allPresent = updated.every((student) => student.status === true);
+			const allAbsent = updated.every((student) => student.status === false);
+			setColumns((prevCols) => ({ ...prevCols, present: allPresent, absent: allAbsent }));
+			return updated;
+		})
 	};
-
+	
 	const handleSave = async () => {
-		const finalData = { staffId, year: studentYear, session, date: new Date(),
+		const finalData = {
+			staffId, year: studentYear, session, date: new Date(),
 			record: formData.map(({ roll_no, status }) => ({ roll_no, status }))
 		}
 		const response = await addData(`${apiUrl}/api/attendance/saveInfo`, finalData);
-		if(response != null) { alert('Data saved successfully')}
+		if (response != null) { alert('Data saved successfully') }
 	}
 
 	return (

@@ -2,14 +2,18 @@ import React from 'react';
 import { Menu, LogOut } from 'lucide-react'
 import { useLocation, matchPath } from 'react-router-dom';
 
-function Topbar({ onClick }) 
-{
-    const location = useLocation(); 
+function Topbar({ onClick }) {
+    const location = useLocation();
 
     const menuNames = {
         '/layout/:staffId/home': 'Home',
-        '/layout/report': 'Report',
-        '/layout/usermanagement': 'User Management', 
+        '/layout/:staffId/report': 'Report',
+        '/layout/:staffId/userManagement': 'User Management',
+        '/layout/:staffId/academicManagement': 'Academic Management',
+        '/layout/:staffId/classAttendance': 'Attendance',
+        '/layout/:staffId/fileUpload': 'File Upload',
+        '/layout/:staffId/leaveManagement': 'Leave Management',
+        '/layout/:staffId/substitutionManagement': 'Substitution Management',
     };
 
     let currentMenu = 'Menu';
