@@ -7,7 +7,7 @@ function OverLayout()
 {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
-    return (
+    return (  
         <div className="relative min-h-screen overflow-hidden">
             {isSideBarOpen && ( <div className="fixed inset-0 bg-black/10 backdrop-blur-sm z-10" onClick={() => setIsSideBarOpen(false)}></div> )}
             {isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}

@@ -126,8 +126,8 @@ function Attendance()
 					</thead>
 					<tbody className="text-gray-800">
 						{formData.map((student, index) => {
-							return (
-								<tr
+							return (    
+								<tr 
 									key={student.roll_no}
 									className={`transition ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}
 								>
