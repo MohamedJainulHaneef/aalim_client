@@ -86,7 +86,7 @@ function Home()
                                         <div
                                             className={`text-white px-3 py-1 rounded-md text-xs font-semibold ${index % 2 === 0 ? 'bg-indigo-700' : 'bg-blue-600' }`}
                                         >
-                                            {details.semester} - {details.session_1 ? 'I Hour' : 'II Hour'}
+                                            {details.session_1 ? 'I Hour' : 'II Hour'}
                                         </div>
                                     </div>
                                     <div className="flex justify-center gap-8 px-10 mt-4 bg-white rounded-lg shadow-md max-w-md mx-auto">

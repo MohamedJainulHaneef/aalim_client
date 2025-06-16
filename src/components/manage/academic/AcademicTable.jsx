@@ -29,7 +29,7 @@ function AcademicTable()
     return (
         <>
             {loading && (
-                <div className="text-center py-4 text-blue-600 font-semibold"> Loading users ... </div>
+                <div className="text-center py-4 text-blue-600 font-semibold"> Loading Academic ... </div>
             )}
             {error && (
                 <div className="text-center py-4 text-red-500 font-semibold"> Error : {error} </div>
