@@ -28,7 +28,7 @@ const App = () =>
 				<Route path=':staffId/substitutionManagement' element={<Substitution />} />
 			</Route>                  
 		</Routes>
-	);
-}; 
+	)
+}
 
 export default App;
