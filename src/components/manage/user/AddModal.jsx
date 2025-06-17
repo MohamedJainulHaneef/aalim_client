@@ -21,7 +21,7 @@ function AddPopup({ onSuccess })
             alert('Fill all the fields'); return false;
         }
         const data = await addData(Url, formData);
-        if (data) { alert('User Added Sucessfully'); onSuccess() }
+        if (data) { alert('User added sucessfully'); onSuccess() }
     } 
 
     return (

@@ -11,7 +11,7 @@ function DeletePopup({ onClose, selectedSubstitution })
     const handleSubmit = async () => {
         const id = selectedSubstitution;
         const response = await deleteData(`${apiUrl}/api/substitution/deleteSubstitution`, id)
-        if (response !== null) { alert('Data deleted succesfully'); onClose(); }
+        if (response !== null) { alert('Substitution deleted succesfully'); onClose(); }
     }
 
     return (

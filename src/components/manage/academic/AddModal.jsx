@@ -24,7 +24,7 @@ function AddModal({ onSuccess })
             return alert('Fill all the fields');
         }
         const response = await addData(`${apiUrl}/api/academic/addData`, data);
-        if (response) { alert("Academic Added Successfully"); onSuccess() }
+        if (response) { alert("Academic added successfully"); onSuccess() }
     }
 
     return (

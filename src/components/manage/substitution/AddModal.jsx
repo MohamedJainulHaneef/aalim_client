@@ -42,7 +42,7 @@ function AddModal({ onSuccess })
         const { date, year, session, absentStaffId, replacementStaffId } = formData;
         if (!date || !year || !session || !absentStaffId || !replacementStaffId) { return alert('Fill all the fields') }
         const response = await addData(`${apiUrl}/api/substitution/addData`, formData);
-        if (response) { alert("Substitution Added Successfully"); onSuccess() }
+        if (response) { alert("Substitution added successfully"); onSuccess() }
     }
 
     return (

@@ -25,7 +25,7 @@ function EditPopup({ onClose, selectedUser })
     const handleSubmit = async () => {
         if (!formData.staffId || !formData.fullName || !formData.password) return alert('Fill all the fields');
         const data = await editData(`${apiUrl}/api/users/editStaff`, formData);
-        if (data !== null) { alert('Data updated sucessfully'); onClose() }
+        if (data !== null) { alert('User updated sucessfully'); onClose() }
     }
 
     return (

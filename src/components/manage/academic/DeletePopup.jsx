@@ -11,7 +11,7 @@ function DeletePopup({ onClose, selectedAcademic })
     const handleSubmit = async () => {
         const id = selectedAcademic;
         const response = await deleteData(`${apiUrl}/api/academic/deleteAcademic`, id)
-        if (response !== null) { alert('Data deleted succesfully'); onClose(); }
+        if (response !== null) { alert('Academic deleted succesfully'); onClose(); }
     }
 
     return (

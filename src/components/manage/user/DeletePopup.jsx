@@ -11,7 +11,7 @@ function DeletePopup({ onClose, selectedUser })
     const handleSubmit = async () => {
         const id = selectedUser;
         const response = await deleteData(`${apiUrl}/api/users/deleteStaff`, id)
-        if (response !== null) { alert('Data deleted succesfully'); onClose(); }
+        if (response !== null) { alert('User deleted succesfully'); onClose(); }
     }
 
     return (

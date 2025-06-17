@@ -30,7 +30,7 @@ function EditPopup({ onClose, selectedLeave })
     const handleSubmit = async () => {
         if (!formData.leaveFromDate || !formData.leaveToDate || !formData.reason) return alert('Fill all the fields');
         const data = await editData(`${apiUrl}/api/leave/leaveEdit`, formData);
-        if (data !== null) { alert('Data updated sucessfully'); onClose() }
+        if (data !== null) { alert('Leave updated sucessfully'); onClose() }
     }
 
     return (

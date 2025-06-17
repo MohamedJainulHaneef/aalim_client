@@ -31,7 +31,7 @@ function EditPopup({ onClose, selectedAcademic })
     const handleSubmit = async () => {
         if (!formData.academicFromDate || !formData.academicToDate) return alert('Fill all the fields');
         const data = await editData(`${apiUrl}/api/academic/academicEdit`, formData);
-        if (data !== null) { alert('Data updated sucessfully'); onClose() }
+        if (data !== null) { alert('Academic updated sucessfully'); onClose() }
     }
 
     return (

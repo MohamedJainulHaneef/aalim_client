@@ -4,14 +4,14 @@ import { faTrashAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useDelete } from '../../../hooks/useDelete';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function DeletePopup({ onClose, selectedLeave }) 
+function DeletePopup({ onClose, selectedLeave })  
 {
     const { deleteData, loading, error } = useDelete();
 
     const handleSubmit = async () => {
         const id = selectedLeave;
-        const response = await deleteData(`${apiUrl}/api/leave/deleteSubstitution`, id)
-        if (response !== null) { alert('Data deleted succesfully'); onClose(); }
+        const response = await deleteData(`${apiUrl}/api/leave/deleteLeave`, id)
+        if (response !== null) { alert('Leave deleted succesfully'); onClose(); }
     }
 
     return (

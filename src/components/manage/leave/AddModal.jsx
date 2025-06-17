@@ -22,7 +22,7 @@ function AddModal({ onSuccess })
     const handleSave = async () => {
         if (!data.leaveFromDate || !data.leaveToDate) { return alert('Fill all the fields') }
         const response = await addData(`${apiUrl}/api/leave/addData`, data);
-        if (response) { alert("Leave Added Successfully"); onSuccess() }
+        if (response) { alert("Leave added successfully"); onSuccess() }
     }
 
     return (
