@@ -59,7 +59,7 @@ function Attendance()
 	
 	const handleSave = async () => {
 		const finalData = {
-			staffId, year: studentYear, session, date: new Date(),
+			staffId, year: studentYear, session, date: new Date(), courseCode: courseCode,
 			record: formData.map(({ roll_no, status }) => ({ roll_no, status }))
 		}
 		const response = await addData(`${apiUrl}/api/attendance/saveInfo`, finalData);
@@ -139,7 +139,7 @@ function Attendance()
 										<td className="px-4 py-2 border border-blue-100">{student.roll_no}</td>
 									)}
 									{columns.name && (
-										<td className="px-4 py-2 border border-blue-100">{student.stu_name}</td>
+										<td className="px-4 py-2 border whitespace-nowrap border-blue-100">{student.stu_name}</td>
 									)}
 									<td className="px-4 py-2 border border-blue-100">
 										<button
