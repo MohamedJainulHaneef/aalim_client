@@ -15,7 +15,7 @@ function Attendance()
 	const { studentYear, courseCode, session } = location.state || {};
 	const { loading: fetchLoading, error: fetchError, data, fetchData } = useFetch();
 	const { loading: addLoading, error: addError, addData } = useAdd();
-	const date = new Date();
+	const date = new Date("23-Jun-2025");
 	const buttonObject = { name: 'Save', icon: faSave, design: 'bg-blue-500 hover:bg-blue-600 w-24' };
 	const formattedDate = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}.${date.getFullYear()}`;
 
