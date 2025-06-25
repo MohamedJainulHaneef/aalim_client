@@ -27,7 +27,7 @@ function SideBar({ onClose })
                 { name: 'User Management', path: `/layout/${staffId}/userManagement` },
                 { name: 'Leave Management', path: `/layout/${staffId}/leaveManagement` },
                 { name: 'Academic Management', path: `/layout/${staffId}/academicManagement` },
-                { name: 'Course Management', path: `/layout/${staffId}/courseManagement` },
+                // { name: 'Course Management', path: `/layout/${staffId}/courseManagement` },
                 
             ]
         },
@@ -37,13 +37,12 @@ function SideBar({ onClose })
             icon: faUpload,
             show: staffId === 'ADMIN'
         },
-        
-        {
-            name: 'Report',
-            path: `/layout/${staffId}/report`,
-            icon: faChartSimple,
-            show: staffId === 'ADMIN'
-        },
+        // {
+        //     name: 'Report',
+        //     path: `/layout/${staffId}/report`,
+        //     icon: faChartSimple,
+        //     show: staffId === 'ADMIN'
+        // },
         {
             name: 'Logout',
             path: '/',

@@ -31,7 +31,8 @@ const LoginForm = () =>
         <div className="min-h-screen flex flex-col justify-center bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-600 px-8 pb-20 lg:pb-0 gap-5 lg:items-center">
             <div className="text-center text-white">
                 <p className="text-md font-bold lg:text-lg">PG & RESEARCH DEPARTMENT OF ARABIC</p>
-                <p className="text-md font-bold lg:text-lg">JAMAL MOHAMED COLLEGE ( AUTONOMOUS )</p>
+                <p className="text-md font-bold lg:text-lg">JAMAL MOHAMED COLLEGE</p>
+                <p className="text-md font-bold lg:text-lg">( AUTONOMOUS )</p>
                 <p className="text-md font-bold lg:text-lg">TIRUCHIRAPPALLI - 620 020 .</p>
             </div>
             <div className="rounded-2xl shadow-lg text-black bg-white py-6 px-6 lg:max-h-fit lg:py-10 lg:px-10">

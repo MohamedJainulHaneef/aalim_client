@@ -6,7 +6,6 @@ export const addDataAPI = async (apiUrl, formData) => {
 }
 
 export const fetchDataAPI = async (apiUrl, formData) => {
-    // console.log('Hello')
     const response = await axios.post(`${apiUrl}`, formData )
     return response.data;
 }
