@@ -10,6 +10,8 @@ import Leave from './pages/manage/Leave';
 import Academic from './pages/manage/Academic';
 import Substitution from './pages/manage/Substitution';
 import FileUpload from './pages/FileUpload';
+import ClassReport from './pages/ClassReport';
+import Course from './pages/manage/Course';
 
 const App = () => 
 {
@@ -25,6 +27,8 @@ const App = () =>
 				<Route path=':staffId/userManagement' element={<User />} />
 				<Route path=':staffId/fileUpload' element={<FileUpload />} />
 				<Route path=':staffId/leaveManagement' element={<Leave />} />
+				<Route path=':staffId/classreport' element={<ClassReport />} />
+				<Route path=':staffId/courseManagement' element={<Course />} />
 				<Route path=':staffId/substitutionManagement' element={<Substitution />} />
 			</Route>                  
 		</Routes>

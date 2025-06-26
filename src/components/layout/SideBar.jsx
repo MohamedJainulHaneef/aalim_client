@@ -3,7 +3,7 @@ import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { NavLink, useParams } from 'react-router-dom';
 import Login from '../../assets/login.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faChartSimple, faUserGear, faRightFromBracket, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChartSimple, faUserGear, faRightFromBracket, faUpload, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 
 function SideBar({ onClose }) 
 {
@@ -19,6 +19,12 @@ function SideBar({ onClose })
             show: true
         },
         {
+            name: 'Class Report',
+            path: `/layout/${staffId}/classreport`,
+            icon: faFileAlt,
+            show: true
+        },
+        {
             name: 'Manage',
             icon: faUserGear,
             show: staffId === 'ADMIN',
@@ -27,7 +33,7 @@ function SideBar({ onClose })
                 { name: 'User Management', path: `/layout/${staffId}/userManagement` },
                 { name: 'Leave Management', path: `/layout/${staffId}/leaveManagement` },
                 { name: 'Academic Management', path: `/layout/${staffId}/academicManagement` },
-                // { name: 'Course Management', path: `/layout/${staffId}/courseManagement` },
+                { name: 'Course Management', path: `/layout/${staffId}/courseManagement` },
                 
             ]
         },
@@ -37,12 +43,12 @@ function SideBar({ onClose })
             icon: faUpload,
             show: staffId === 'ADMIN'
         },
-        // {
-        //     name: 'Report',
-        //     path: `/layout/${staffId}/report`,
-        //     icon: faChartSimple,
-        //     show: staffId === 'ADMIN'
-        // },
+        {
+            name: 'Report',
+            path: `/layout/${staffId}/report`,
+            icon: faChartSimple,
+            show: staffId === 'ADMIN'
+        },
         {
             name: 'Logout',
             path: '/',
