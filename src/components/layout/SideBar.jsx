@@ -22,7 +22,7 @@ function SideBar({ onClose })
             name: 'Class Report',
             path: `/layout/${staffId}/classreport`,
             icon: faFileAlt,
-            show: true
+            show: staffId === 'ADMIN'
         },
         {
             name: 'Manage',
@@ -34,7 +34,6 @@ function SideBar({ onClose })
                 { name: 'Leave Management', path: `/layout/${staffId}/leaveManagement` },
                 { name: 'Academic Management', path: `/layout/${staffId}/academicManagement` },
                 { name: 'Course Management', path: `/layout/${staffId}/courseManagement` },
-                
             ]
         },
         {
