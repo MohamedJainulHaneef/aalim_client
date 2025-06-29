@@ -12,6 +12,7 @@ import Substitution from './pages/manage/Substitution';
 import FileUpload from './pages/FileUpload';
 import ClassReport from './pages/ClassReport';
 import Course from './pages/manage/Course';
+import AttendManage from './pages/manage/Attendance'
 
 const App = () => 
 {
@@ -22,6 +23,7 @@ const App = () =>
 				<Route index element={<Navigate to=':staffId/home' replace />} />
 				<Route path=':staffId/home' element={<Home />} />
 				<Route path=':staffId/classAttendance' element={<Attendance />} />
+				<Route path=':staffId/attendanceManagement' element={<AttendManage />} />
 				<Route path=':staffId/report' element={<Report />} />
 				<Route path=':staffId/academicManagement' element={<Academic />} />
 				<Route path=':staffId/userManagement' element={<User />} />

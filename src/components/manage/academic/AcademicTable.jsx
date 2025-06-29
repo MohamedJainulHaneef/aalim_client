@@ -9,7 +9,6 @@ const apiUrl = import.meta.env.VITE_API_URL;
 function AcademicTable() 
 {
     const { fetchData, loading, error, data } = useFetch();
-
     const [isEditPopupOpen, setIsEditModalOpen] = useState(false);
     const [isDeletePopupOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedAcademic, setSelectedAcademic] = useState(null);

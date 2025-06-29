@@ -8,14 +8,14 @@ function Topbar({ onClick }) {
     const navigate = useNavigate();
 
     const menuNames = {
-        '/layout/:staffId/home': 'Home',
+        '/layout/:staffId/substitutionManagement': 'Substitution Management',
         '/layout/:staffId/report': 'Report',
         '/layout/:staffId/userManagement': 'User Management',
         '/layout/:staffId/academicManagement': 'Academic Management',
+        '/layout/:staffId/home': 'Home',
         '/layout/:staffId/classAttendance': 'Attendance',
         '/layout/:staffId/fileUpload': 'File Upload',
         '/layout/:staffId/leaveManagement': 'Leave Management',
-        '/layout/:staffId/substitutionManagement': 'Substitution Management',
     };
 
     let currentMenu = 'Menu';
