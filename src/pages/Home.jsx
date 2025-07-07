@@ -89,7 +89,7 @@ function Home()
                                             {details.session}
                                         </div>
                                     </div>
-                                    <div className="flex justify-center gap-8 px-10 mt-4 bg-white rounded-lg shadow-md max-w-md mx-auto">
+                                    <div className="flex justify-center gap-8 px-10 mt-4 bg-white rounded-lg shadow-md max-w-md mx-auto md:shadow-none">
                                         <div className="flex flex-col items-center py-2 flex-1">
                                             <p
                                                 className={`text-sm font-medium uppercase tracking-wide ${index % 2 === 0 ? 'text-indigo-700' : 'text-blue-600' }`}

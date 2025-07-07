@@ -83,18 +83,18 @@ const Attendance = () => {
         <div className="w-full min-h-screen bg-gray-100 p-5 space-y-6">
             {/* Filter Form */}
             <div
-                className="flex flex-wrap items-center justify-end lg:justify-between gap-4 p-4 bg-white rounded-xl shadow-md"
+                className="flex flex-wrap items-center justify-end lg:justify-between gap-4 p-4 bg-white rounded-xl shadow-md lg:gap-0"
             >
                 <input
                     type="date" name="date"
                     value={form.date}
                     onChange={handleChange}
-                    className="px-4 py-2 border border-gray-300 rounded-lg w-full md:w-auto"
+                    className="px-4 py-2 border border-gray-300 rounded-lg w-full lg:w-[32%]"
                 />
                 <select
                     name="year" value={form.year}
                     onChange={handleChange}
-                    className="px-4 py-2 border border-gray-300 rounded-lg w-full md:w-auto"
+                    className="px-4 py-2 border border-gray-300 rounded-lg w-full lg:w-[32%]"
                 >
                     <option value="">Select Year</option>
                     <option value="I Year">I Year</option>
@@ -107,7 +107,7 @@ const Attendance = () => {
                     name="session"
                     value={form.session}
                     onChange={handleChange}
-                    className="px-4 py-2 border border-gray-300 rounded-lg w-full md:w-auto"
+                    className="px-4 py-2 border border-gray-300 rounded-lg w-full lg:w-[33%]"
                 >
                     <option value="">Select Session</option>
                     <option value="I Hour">I Hour</option>
