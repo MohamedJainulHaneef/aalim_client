@@ -13,6 +13,7 @@ import FileUpload from './pages/FileUpload';
 import ClassReport from './pages/ClassReport';
 import Course from './pages/manage/Course';
 import AttendManage from './pages/manage/Attendance'
+import AttendReport from './pages/manage/AttendReport';
 
 const App = () => 
 {
@@ -24,6 +25,7 @@ const App = () =>
 				<Route path=':staffId/home' element={<Home />} />
 				<Route path=':staffId/classAttendance' element={<Attendance />} />
 				<Route path=':staffId/attendanceManagement' element={<AttendManage />} />
+				<Route path=':staffId/attendanceReport' element={<AttendReport />} />
 				<Route path=':staffId/report' element={<Report />} />
 				<Route path=':staffId/academicManagement' element={<Academic />} />
 				<Route path=':staffId/userManagement' element={<User />} />
