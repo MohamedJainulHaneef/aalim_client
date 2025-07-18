@@ -133,7 +133,7 @@ function SideBar({ onClose })
     }
 
     return (
-        <div className="fixed top-0 left-0 h-full w-64 py-5 px-3 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500 z-30 shadow-xl transition-transform duration-300">
+        <div className="fixed top-0 left-0 h-full w-68 py-5 px-3 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500 z-30 shadow-xl overflow-x-scroll transition-transform duration-300">
             <button className="absolute top-4 right-4 hover:bg-white/40 transition p-1" onClick={onClose}>
                 <X className="h-5 w-5 text-white" />
             </button>
