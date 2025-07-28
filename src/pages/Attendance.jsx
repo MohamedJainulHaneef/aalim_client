@@ -7,8 +7,7 @@ import { useFetch } from '../hooks/useFetch';
 import { useAdd } from '../hooks/useAdd'
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function Attendance() 
-{
+function Attendance() {
 	const [formData, setFormData] = useState([]);
 	const location = useLocation();
 	const { staffId } = useParams();
@@ -23,7 +22,12 @@ function Attendance()
 		fetchData(`${apiUrl}/api/attendance/studentsInfo`, { studentYear, session, formattedDate, staffId });
 	}, [studentYear, session, staffId]);
 
-	useEffect(() => { if (data && Array.isArray(data)) { setFormData(data) } }, [data]);
+	useEffect(() => {
+		if (data && Array.isArray(data)) {
+			const sortedData = [...data].sort((a, b) => a.roll_no.localeCompare(b.roll_no));
+			setFormData(sortedData);
+		}
+	}, [data]);
 
 	useEffect(() => { setColumns((prev) => ({ ...prev, present: true })) }, []);
 
@@ -56,7 +60,7 @@ function Attendance()
 			return updated;
 		})
 	};
-	
+
 	const handleSave = async () => {
 		const finalData = {
 			staffId, year: studentYear, session, date: new Date(), courseCode: courseCode,
@@ -127,8 +131,8 @@ function Attendance()
 					</thead>
 					<tbody className="text-gray-800">
 						{formData.map((student, index) => {
-							return (    
-								<tr 
+							return (
+								<tr
 									key={student.roll_no}
 									className={`transition ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}
 								>

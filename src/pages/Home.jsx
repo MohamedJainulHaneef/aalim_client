@@ -16,6 +16,7 @@ function Home()
 
     useEffect(() => {
         fetchData(`${apiUrl}/api/timeTable/staffClass`, { staffId });
+        console.log(data)
     }, [staffId]);
 
     const staffObj = Array.isArray(data) ? data.find(d => d.staffName) : {};
@@ -37,19 +38,16 @@ function Home()
                     {staffObj?.staffName || 'Unknown Staff'}
                 </p>
             </div>
-
             {loading && (
                 <div className="text-center py-4 text-blue-600 font-semibold">
                     Loading classes ...
                 </div>
             )}
-
             {error && (
                 <div className="text-center py-4 text-red-500 font-semibold">
                     Error: {error}
                 </div>
             )}
-
             {!loading && !error && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-6">
                     {classList.length > 0 ? (

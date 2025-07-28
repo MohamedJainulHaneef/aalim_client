@@ -23,7 +23,12 @@ const Attendance = () => {
         e.preventDefault();
         try {
             const response = await addData(`${apiUrl}/api/attendance/attmanform`, form);
-            if (response?.records) { setRecords(response.records) }
+            if (response?.records) {
+                const sortedRecords = [...response.records].sort((a, b) =>
+                    String(a.roll_no).localeCompare(String(b.roll_no))
+                );
+                setRecords(sortedRecords);
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
             alert('Error fetching records.');

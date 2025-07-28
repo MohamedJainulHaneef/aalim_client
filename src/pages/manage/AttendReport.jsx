@@ -26,14 +26,14 @@ function AttendReport() {
                         onClick={get}
                         className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
                     >
-                        Get
+                        Get Data
                     </button>
                 </div>
             </div>
 
             {/* Loader / Error / Table */}
             {loading && (
-                <div className="text-center py-4 text-blue-600 font-semibold">Loading Substitution...</div>
+                <div className="text-center py-4 text-blue-600 font-semibold">Loading Report Data...</div>
             )}
             {error && (
                 <div className="text-center py-4 text-red-500 font-semibold">Error: {error}</div>
