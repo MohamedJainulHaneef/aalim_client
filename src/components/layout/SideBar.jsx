@@ -19,12 +19,6 @@ function SideBar({ onClose })
             show: true
         },
         {
-            name: 'Class Report',
-            path: `/layout/${staffId}/classreport`,
-            icon: faFileAlt,
-            show: staffId === 'ADMIN'
-        },
-        {
             name: 'Manage',
             icon: faUserGear,
             show: staffId === 'ADMIN',
@@ -45,8 +39,14 @@ function SideBar({ onClose })
             show: staffId === 'ADMIN'
         },
         {
-            name: 'Report',
-            path: `/layout/${staffId}/report`,
+            name: 'Student Report',
+            path: `/layout/${staffId}/studentreport`,
+            icon: faFileAlt,
+            show: staffId === 'ADMIN'
+        },
+        {
+            name: 'Staff Report',
+            path: `/layout/${staffId}/staffreport`,
             icon: faChartSimple,
             show: staffId === 'ADMIN'
         },

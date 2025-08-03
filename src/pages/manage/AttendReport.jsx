@@ -16,7 +16,7 @@ function AttendReport() {
 
             {/* Year & Date Filter */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-5">
                     <input
                         type="date"
                         onChange={(e) => setDate(e.target.value)}
