@@ -17,7 +17,7 @@ function StaffReport() {
             <div className='flex justify-end'>
                 <button
                     onClick={getStaffReport}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                    className="bg-blue-600 w-40 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
                 >
                     Get Staff Report
                 </button>
@@ -39,10 +39,16 @@ function StaffReport() {
 
             {/* Table */}
             {!loading && !error && data?.length > 0 && (
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto flex flex-col items-end">
+                    <button
+                        className="mb-6 w-40 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+                    >
+                        Download Excel
+                    </button>
                     <table className="text-center w-full bg-white rounded shadow-md border border-gray-300 border-collapse">
                         <thead className="bg-blue-500 text-white">
                             <tr>
+                                <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">S No</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Staff ID</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Full Name</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Attendance Count</th>
@@ -51,6 +57,9 @@ function StaffReport() {
                         <tbody>
                             {data.map((staff, index) => (
                                 <tr key={index} className="border">
+                                    <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
+                                        {index+1}
+                                    </td>
                                     <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
                                         {staff.staffId}
                                     </td>
@@ -71,7 +80,7 @@ function StaffReport() {
             {!loading && !error && data?.length === 0 && (
                 <div className="text-center text-gray-500 py-4">No staff report available.</div>
             )}
-            
+
         </div>
     )
 }
