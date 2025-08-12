@@ -2,6 +2,8 @@ import React from 'react';
 import { faTools } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFetch } from '../hooks/useFetch';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 function StaffReport() {
 
@@ -10,9 +12,25 @@ function StaffReport() {
 
     const getStaffReport = () => { fetchData(`${apiUrl}/api/report/staff`) };
 
+    const handleDownload = () => {
+        const headers = ['STAFF_ID', 'FULL_NAME', 'ATTENDANCE_COUNT'];
+        const sheetData = [headers, ...data.map(staff => [
+            staff.staffId,
+            staff.fullName,
+            staff.attendanceCount,
+        ])];
+
+        const ws = XLSX.utils.aoa_to_sheet(sheetData);
+        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+        });
+        saveAs(blob, 'Staff Report.xlsx');
+    }
+
     return (
         <div className='p-6 w-full space-y-6'>
-
             {/* Button */}
             <div className='flex justify-end'>
                 <button
@@ -41,6 +59,7 @@ function StaffReport() {
             {!loading && !error && data?.length > 0 && (
                 <div className="overflow-x-auto flex flex-col items-end">
                     <button
+                    onClick={handleDownload}
                         className="mb-6 w-40 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
                     >
                         Download Excel
@@ -58,7 +77,7 @@ function StaffReport() {
                             {data.map((staff, index) => (
                                 <tr key={index} className="border">
                                     <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
-                                        {index+1}
+                                        {index + 1}
                                     </td>
                                     <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
                                         {staff.staffId}
