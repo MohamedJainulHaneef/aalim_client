@@ -168,8 +168,8 @@ function ClassReport() {
                         <thead className="bg-blue-500 text-white">
                             <tr>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">S No</th>
-                                <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Reg No</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Roll No</th>
+                                <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Reg No</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Year</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Total Classes</th>
                                 <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Present</th>
@@ -183,10 +183,10 @@ function ClassReport() {
                                         {index + 1}
                                     </td>
                                     <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
-                                        {student.reg_no}
+                                        {student.roll_no}
                                     </td>
                                     <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
-                                        {student.roll_no}
+                                        {student.reg_no}
                                     </td>
                                     <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
                                         {student.year}
