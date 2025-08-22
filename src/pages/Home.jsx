@@ -16,7 +16,6 @@ function Home()
 
     useEffect(() => {
         fetchData(`${apiUrl}/api/timeTable/staffClass`, { staffId });
-        console.log(data)
     }, [staffId]);
 
     const staffObj = Array.isArray(data) ? data.find(d => d.staffName) : {};
