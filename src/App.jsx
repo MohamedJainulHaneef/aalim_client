@@ -14,6 +14,8 @@ import StudentReport from './pages/StudentReport';
 import Course from './pages/manage/Course';
 import AttendManage from './pages/manage/Attendance'
 import AttendReport from './pages/manage/AttendReport';
+import ChangePassword from './pages/ChangePassword';
+import DataDeletion from './pages/DataDeletion';
 
 const App = () => 
 {
@@ -34,6 +36,8 @@ const App = () =>
 				<Route path=':staffId/studentreport' element={<StudentReport />} />
 				<Route path=':staffId/courseManagement' element={<Course />} />
 				<Route path=':staffId/substitutionManagement' element={<Substitution />} />
+				<Route path=':staffId/changePassword' element={<ChangePassword />} />
+				<Route path=':staffId/dataDeletion' element={<DataDeletion />} />
 			</Route>                  
 		</Routes>
 	)

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { NavLink, useParams } from 'react-router-dom';
 import Login from '../../assets/login.png';
+import '../../index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faChartSimple, faUserGear, faRightFromBracket, faUpload, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChartSimple, faUserGear, faRightFromBracket, faUpload, faFileAlt, faTrash, faKey } from '@fortawesome/free-solid-svg-icons';
 
-function SideBar({ onClose }) 
-{
+function SideBar({ onClose }) {
+    
     const [manageOpen, setManageOpen] = useState(false);
 
     const { staffId } = useParams();
@@ -51,6 +52,18 @@ function SideBar({ onClose })
             show: staffId === 'ADMIN'
         },
         {
+            name: 'Change Password',
+            path: `/layout/${staffId}/changePassword`,
+            icon: faKey,
+            show: true
+        },
+        {
+            name: 'Data Deletion',
+            path: `/layout/${staffId}/dataDeletion`,
+            icon: faTrash,
+            show: staffId === 'ADMIN'
+        },
+        {
             name: 'Logout',
             path: '/',
             icon: faRightFromBracket,
@@ -58,10 +71,8 @@ function SideBar({ onClose })
         },
     ];
 
-    const renderNavItem = (item) => 
-    {
-        if (item.subItems) 
-        {
+    const renderNavItem = (item) => {
+        if (item.subItems) {
             return (
                 <div key={item.name}>
                     <button
@@ -133,7 +144,7 @@ function SideBar({ onClose })
     }
 
     return (
-        <div className="fixed top-0 left-0 h-full w-68 py-5 px-3 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500 z-30 shadow-xl overflow-x-scroll transition-transform duration-300">
+        <div className="fixed top-0 left-0 h-full w-68 py-5 px-3 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500 z-30 shadow-xl overflow-x-scroll transition-transform duration-300 hide-scrollbar">
             <button className="absolute top-4 right-4 hover:bg-white/40 transition p-1" onClick={onClose}>
                 <X className="h-5 w-5 text-white" />
             </button>
