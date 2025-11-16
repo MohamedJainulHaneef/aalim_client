@@ -76,7 +76,7 @@ function FileUpload() {
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
                 <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 flex flex-col items-center gap-4 hover:shadow-lg transition">
                     <p>Time Table File</p>
                     <label className="w-full text-center cursor-pointer">
