@@ -11,7 +11,6 @@ import Academic from './pages/manage/Academic';
 import Substitution from './pages/manage/Substitution';
 import FileUpload from './pages/FileUpload';
 import StudentReport from './pages/StudentReport';
-import Course from './pages/manage/Course';
 import AttendManage from './pages/manage/Attendance'
 import AttendReport from './pages/manage/AttendReport';
 import ChangePassword from './pages/ChangePassword';
@@ -34,7 +33,6 @@ const App = () =>
 				<Route path=':staffId/fileUpload' element={<FileUpload />} />
 				<Route path=':staffId/leaveManagement' element={<Leave />} />
 				<Route path=':staffId/studentreport' element={<StudentReport />} />
-				<Route path=':staffId/courseManagement' element={<Course />} />
 				<Route path=':staffId/substitutionManagement' element={<Substitution />} />
 				<Route path=':staffId/changePassword' element={<ChangePassword />} />
 				<Route path=':staffId/dataDeletion' element={<DataDeletion />} />

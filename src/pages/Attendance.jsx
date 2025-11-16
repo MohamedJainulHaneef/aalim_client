@@ -8,6 +8,7 @@ import { useAdd } from '../hooks/useAdd'
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function Attendance() {
+	
 	const [formData, setFormData] = useState([]);
 	const location = useLocation();
 	const { staffId } = useParams();
