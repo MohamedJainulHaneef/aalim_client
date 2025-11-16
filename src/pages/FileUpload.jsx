@@ -7,6 +7,8 @@ function FileUpload() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [file1, setFile1] = useState(null);
     const [studentFile, setStudentFile] = useState(null);
+    const [courseFile, setCourseFile] = useState(null);
+
     const [loading, setLoading] = useState(false);
 
     const handleFileChange = (e) => { setFile1(e.target.files[0]) }
@@ -48,6 +50,31 @@ function FileUpload() {
         setLoading(false);
     }
 
+    const handleCourseUpload = async (e) => {
+        e.preventDefault();
+        if (!courseFile) {
+            alert("Please select a course file");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", courseFile);
+
+        try {
+            setLoading(true);
+            const res = await axios.post(`${apiUrl}/api/timeTable/courseupload`, formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
+            alert(res.data);
+        } catch (err) {
+            const message = err?.response?.data || "Course upload failed";
+            alert(message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     return (
         <div className="min-h-screen bg-gray-50 p-6">
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 w-full">
@@ -84,15 +111,18 @@ function FileUpload() {
                 <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 flex flex-col items-center gap-4 hover:shadow-lg transition">
                     <p>Course File</p>
                     <label className="w-full text-center cursor-pointer">
-                        <input type="file" name="studentFile" onChange={(e) => setStudentFile(e.target.files[0])} className="hidden" />
+                        <input type="file" onChange={(e) => setCourseFile(e.target.files[0])} className="hidden" />
                         <div className="flex flex-col items-center gap-2">
                             <UploadCloud className="h-10 w-10 text-blue-500" />
                             <span className="text-sm text-gray-600">
-                                {studentFile ? studentFile.name : 'Click to select a file'}
+                                {courseFile ? courseFile.name : "Click to select a file"}
                             </span>
                         </div>
                     </label>
-                    <button onClick={handleStudentUpload} className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    <button
+                        onClick={handleCourseUpload}
+                        className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+                    >
                         Upload
                     </button>
                 </div>
