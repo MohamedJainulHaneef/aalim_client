@@ -1,98 +1,112 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave, faTimes, faCalendarAlt, faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { faSave, faTimes, faUserPlus, faUser, faLock, faIdBadge } from '@fortawesome/free-solid-svg-icons';
 import { useAdd } from '../../../hooks/useAdd';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function AddModal({ onSuccess, onClose }) {
+function AddPopup({ onSuccess, onClose }) {
 
-    const { error, loading, addData } = useAdd();
-    const [data, setData] = useState({ leaveFromDate: '', leaveToDate: '', reason: '' });
-    const [touched, setTouched] = useState({ leaveFromDate: false, leaveToDate: false, reason: false });
+    const [formData, setFormData] = useState({ staffId: '', fullName: '', password: '' });
+    const [touched, setTouched] = useState({ staffId: false, fullName: false, password: false });
     const [fieldErrors, setFieldErrors] = useState({});
+    const Url = `${apiUrl}/api/users/addStaff`;
+    const { addData, loading, error } = useAdd();
 
     const validateField = (name, value) => {
         const errors = {};
         if (!value.trim()) {
-            errors[name] = `${name === 'leaveFromDate' ? 'From Date' : name === 'leaveToDate' ? 'To Date' : 'Reason'} is required`;
-        }
-        if (name === 'leaveToDate' && data.leaveFromDate && value && new Date(value) < new Date(data.leaveFromDate)) {
-            errors[name] = 'To Date cannot be earlier than From Date';
+            errors[name] = `${name === 'staffId' ? 'Staff ID' : name === 'fullName' ? 'Full Name' : 'Password'} is required`;
+        } else if (name === 'staffId' && value.length < 3) {
+            errors[name] = 'Staff ID must be at least 3 characters';
+        } else if (name === 'password' && value.length < 6) {
+            errors[name] = 'Password must be at least 6 characters';
         }
         return errors;
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setData({ ...data, [name]: value });
+        setFormData({ ...formData, [name]: value });
         if (touched[name]) {
             const errors = validateField(name, value);
-            setFieldErrors((prev) => ({ ...prev, ...errors }));
+            setFieldErrors(prev => ({ ...prev, ...errors }));
         }
     };
 
     const handleBlur = (e) => {
         const { name, value } = e.target;
-        setTouched((prev) => ({ ...prev, [name]: true }));
+        setTouched(prev => ({ ...prev, [name]: true }));
         const errors = validateField(name, value);
-        setFieldErrors((prev) => ({ ...prev, ...errors }));
+        setFieldErrors(prev => ({ ...prev, ...errors }));
     };
 
-    const handleSave = async () => {
+    const handleSubmit = async () => {
         const errors = {};
-        Object.keys(data).forEach((key) => {
-            const fieldErrors = validateField(key, data[key]);
+        Object.keys(formData).forEach(key => {
+            const fieldErrors = validateField(key, formData[key]);
             Object.assign(errors, fieldErrors);
         });
 
         if (Object.keys(errors).length > 0) {
             setFieldErrors(errors);
-            setTouched({ leaveFromDate: true, leaveToDate: true, reason: true });
+            setTouched({ staffId: true, fullName: true, password: true });
             return;
         }
 
-        const response = await addData(`${apiUrl}/api/leave/addData`, data);
-        if (response) {
+        const data = await addData(Url, formData);
+        if (data) {
             onSuccess?.();
             onClose?.();
         }
     };
 
-    const formFields = [
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+        if (e.key === 'Escape') {
+            onClose?.();
+        }
+    };
+
+    const inputFields = [
         {
-            name: 'leaveFromDate',
-            label: 'From Date',
-            type: 'date',
-            icon: faCalendarAlt,
-        },
-        {
-            name: 'leaveToDate',
-            label: 'To Date',
-            type: 'date',
-            icon: faCalendarAlt,
-        },
-        {
-            name: 'reason',
-            label: 'Reason',
+            name: 'staffId',
             type: 'text',
-            placeholder: 'Enter leave reason',
-            icon: faCommentDots,
+            placeholder: 'Staff ID',
+            icon: faIdBadge,
+            autoComplete: 'off'
         },
+        {
+            name: 'fullName',
+            type: 'text',
+            placeholder: 'Full Name',
+            icon: faUser,
+            autoComplete: 'off'
+        },
+        {
+            name: 'password',
+            type: 'password',
+            placeholder: 'Password',
+            icon: faLock,
+            autoComplete: 'off'
+        }
     ];
 
     return (
         <div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50"
             onClick={(e) => e.target === e.currentTarget && onClose?.()}
         >
             <div className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 overflow-hidden transform transition-all">
+                {/* Header */}
                 <div className="bg-linear-to-r from-blue-600 to-blue-700 px-6 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
                             <div className="bg-white/20 p-2 rounded-lg">
-                                <FontAwesomeIcon icon={faCalendarAlt} className="text-white text-lg" />
+                                <FontAwesomeIcon icon={faUserPlus} className="text-white text-lg" />
                             </div>
-                            <h2 className="text-lg font-bold text-white">Add Leave</h2>
+                            <h2 className="text-lg font-bold text-white">Add New User</h2>
                         </div>
                         <button
                             onClick={onClose}
@@ -103,40 +117,50 @@ function AddModal({ onSuccess, onClose }) {
                     </div>
                 </div>
 
+                {/* Body */}
                 <div className="p-6">
+                    {/* Error Alert */}
                     {error && (
                         <div className="mb-6 p-3 bg-red-50 border-l-4 border-red-500 rounded-md">
                             <p className="text-red-700 text-sm">{error}</p>
                         </div>
                     )}
 
-                    <div className="space-y-5">
-                        {formFields.map((field) => (
+                    <form onKeyDown={handleKeyPress} className="space-y-5">
+                        {inputFields.map((field) => (
                             <div key={field.name}>
-                                <label className="block text-sm font-medium text-slate-600 mb-1.5">{field.label}</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <FontAwesomeIcon icon={field.icon} className="text-gray-400" />
+                                        <FontAwesomeIcon
+                                            icon={field.icon}
+                                            className={`text-gray-400`}
+                                        />
                                     </div>
                                     <input
                                         type={field.type}
                                         name={field.name}
-                                        value={data[field.name]}
+                                        value={formData[field.name]}
                                         placeholder={field.placeholder}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        className={`w-full pl-10 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${touched[field.name] && fieldErrors[field.name]
-                                            ? 'border-red-300 focus:ring-red-400 focus:border-red-400'
-                                            : 'border-gray-300 focus:ring-blue-400 focus:border-blue-400'}`}
+                                        autoComplete={field.autoComplete}
+                                        className={`w-full pl-10 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200
+                                            ${touched[field.name] && fieldErrors[field.name]
+                                                ? 'border-red-300 focus:ring-red-400 focus:border-red-400'
+                                                : 'border-gray-300 focus:ring-blue-400 focus:border-blue-400'
+                                            }`}
                                         disabled={loading}
                                     />
                                 </div>
                                 {touched[field.name] && fieldErrors[field.name] && (
-                                    <p className="mt-2 text-sm text-red-600">{fieldErrors[field.name]}</p>
+                                    <p className="mt-2 text-sm text-red-600 animate-fadeIn">
+                                        {fieldErrors[field.name]}
+                                    </p>
                                 )}
                             </div>
                         ))}
 
+                        {/* Action Buttons */}
                         <div className="flex gap-3 pt-6 border-t border-gray-100">
                             <button
                                 type="button"
@@ -149,9 +173,9 @@ function AddModal({ onSuccess, onClose }) {
                             </button>
                             <button
                                 type="button"
-                                onClick={handleSave}
+                                onClick={handleSubmit}
                                 disabled={loading}
-                                className="flex-1 px-4 py-2.5 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                                className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                             >
                                 {loading ? (
                                     <>
@@ -164,16 +188,16 @@ function AddModal({ onSuccess, onClose }) {
                                 ) : (
                                     <>
                                         <FontAwesomeIcon icon={faSave} className="mr-2" />
-                                        Save Leave
+                                        Save User
                                     </>
                                 )}
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     );
 }
 
-export default AddModal;
+export default AddPopup;

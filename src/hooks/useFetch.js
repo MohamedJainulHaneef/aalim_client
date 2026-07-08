@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { fetchDataAPI } from "../services/user";
 
 export const useFetch = () => {
@@ -7,7 +7,7 @@ export const useFetch = () => {
     const [error, setError] = useState(null);
     const [data, setData] = useState([]);
 
-    const fetchData = async (url, data) => {
+    const fetchData = useCallback(async (url, data) => {
         setLoading(true); setError(null); 
         try {
             const response = await fetchDataAPI(url, data);
@@ -16,6 +16,7 @@ export const useFetch = () => {
             setError(error.message || 'Error Occured');
             setLoading(false); return null
         }
-    }
+    }, []);
+
     return { fetchData, loading, error, data }
 }

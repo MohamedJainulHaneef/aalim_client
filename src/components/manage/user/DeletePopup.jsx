@@ -4,9 +4,8 @@ import { faTrashAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useDelete } from '../../../hooks/useDelete';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function DeletePopup({ onClose, selectedUser }) 
-{
-    const { deleteData, loading, error } = useDelete();
+function DeletePopup({ onClose, selectedUser }) {
+    const { deleteData, loading } = useDelete();
 
     const handleSubmit = async () => {
         const id = selectedUser;
@@ -15,7 +14,7 @@ function DeletePopup({ onClose, selectedUser })
     }
 
     return (
-        <div className="p-6 fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="p-6 fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-sm space-y-6">
                 <div className="text-center">
                     <FontAwesomeIcon icon={faTrashAlt} className="text-red-500 text-2xl mb-2" />

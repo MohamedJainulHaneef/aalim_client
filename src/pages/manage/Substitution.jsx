@@ -4,24 +4,42 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddModal from '../../components/manage/substitution/AddModal';
 import SubstitutionTable from '../../components/manage/substitution/SubstitutionTable';
 
-function Substitution() 
-{
+function Substitution() {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     return (
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <div className="flex justify-end mb-4">
-                <button onClick={() => setIsAddModalOpen(!isAddModalOpen)}
-                    className="cursor-pointer flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow transition duration-200"
-                >
-                    <FontAwesomeIcon icon={faPlus} />
-                    <span>Add Substitution</span>
-                </button>
+        <div className="min-h-screen p-3">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/80 pb-5 mb-6 gap-4">
+                <div>
+                    <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
+                        Substitution Management
+                    </h1>
+                    <p className="text-xs text-slate-400 font-medium tracking-normal mt-0.5">
+                        Track and manage staff substitutions efficiently.
+                    </p>
+                </div>
+
+                <div className="flex items-center self-end sm:self-auto">
+                    <button
+                        onClick={() => setIsAddModalOpen(true)}
+                        className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 border shadow-xs active:scale-98 bg-blue-600 border-blue-600 text-white hover:bg-blue-700"
+                    >
+                        <FontAwesomeIcon icon={faPlus} className="text-xs" />
+                        <span>Add Substitution</span>
+                    </button>
+                </div>
             </div>
-            {isAddModalOpen && ( 
-                <div className="flex justify-center"> <AddModal onSuccess={() => setIsAddModalOpen(false)}/> </div> )
-            }
-           {!isAddModalOpen &&  <SubstitutionTable />}
+
+            <div className="transition-all duration-300">
+                <SubstitutionTable />
+            </div>
+
+            {isAddModalOpen && (
+                <AddModal
+                    onSuccess={() => setIsAddModalOpen(false)}
+                    onClose={() => setIsAddModalOpen(false)}
+                />
+            )}
         </div>
     );
 }

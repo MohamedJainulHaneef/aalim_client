@@ -1,108 +1,146 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { useFetch } from '../../../hooks/useFetch';
 import EditPopup from './EditPopup';
 import DeletePopup from './DeletePopup';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function LeaveTable() 
-{
-    const { fetchData, loading, error, data } = useFetch();
+function LeaveTable() {
 
+    const { fetchData, loading, error, data } = useFetch();
     const [isEditPopupOpen, setIsEditModalOpen] = useState(false);
     const [isDeletePopupOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedLeave, setSelectedLeave] = useState(null);
 
-    const handleEdit = async (details) => {
+    const handleEdit = (details) => {
         setIsEditModalOpen(true);
         setSelectedLeave(details);
-    }
+    };
 
-    const handleDelete = async (id) => {
+    const handleDelete = (id) => {
         setIsDeleteModalOpen(true);
         setSelectedLeave(id);
-    }
+    };
 
-    useEffect(() => { fetchData(`${apiUrl}/api/leave/leaveInfo`) }, []);
+    useEffect(() => {
+        fetchData(`${apiUrl}/api/leave/leaveInfo`);
+    }, []);
+
+    const formatDate = (dateString) => {
+        if (!dateString) return '—';
+        const date = new Date(dateString);
+        if (Number.isNaN(date.getTime())) return dateString;
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
+    const sortedData = data ? [...data].sort((a, b) => new Date(a.leaveFromDate) - new Date(b.leaveFromDate)) : [];
 
     return (
         <>
             {loading && (
-                <div className="text-center py-4 text-blue-600 font-semibold"> Loading Leaves ... </div>
+                <div className="flex justify-center items-center py-12 text-blue-600 font-semibold gap-2 text-sm tracking-normal">
+                    <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                    <span>Loading leave records...</span>
+                </div>
             )}
             {error && (
-                <div className="text-center py-4 text-red-500 font-semibold"> Error : {error} </div>
+                <div className="text-center py-8 text-red-500 font-semibold text-sm tracking-normal bg-red-50/50 border border-red-100 rounded-xl">
+                    Error: {error}
+                </div>
             )}
             {!loading && !error && (
-                <div className="overflow-x-auto">
-                    <table className="text-center w-full bg-white rounded shadow-md border border-gray-300 border-collapse">
-                        <thead className="bg-blue-500 text-white">
+                <div className="w-full overflow-hidden bg-white rounded-xl border border-slate-200/80 shadow-xs">
+                    <table className="w-full text-left border-collapse">
+                        <thead className="bg-slate-50 border-b border-slate-200 text-slate-700">
                             <tr>
-                                <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">From Date</th>
-                                <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">To Date</th>
-                                <th className="px-4 py-2 border border-gray-300 whitespace-nowrap">Reason</th>
-                                <th colSpan={2} className="px-4 py-2 border border-gray-300">Action</th>
+                                <th className="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">
+                                    Leave Details
+                                </th>
+                                <th className="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">
+                                    Reason
+                                </th>
+                                <th className="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">
+                                    Actions
+                                </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {data.length > 0 ? (
-                                data.map((details, index) => {
-                                    const formatDate = (dateString) => {
-                                        const date = new Date(dateString);
-                                        const day = String(date.getDate()).padStart(2, '0');
-                                        const month = String(date.getMonth() + 1).padStart(2, '0');
-                                        const year = date.getFullYear();
-                                        return `${day}-${month}-${year}`;
-                                    }
-                                    return (
-                                        <tr key={index} className="border">
-                                            <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
-                                                {formatDate(details.leaveFromDate)}
-                                            </td>
-                                            <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">
-                                                {formatDate(details.leaveToDate)}
-                                            </td>
-                                            <td className="px-2 py-2 border border-gray-300 whitespace-nowrap">{details.reason}</td>
-                                            <td className="border border-gray-300 w-[15%] py-2 px-2 whitespace-nowrap">
+                        <tbody className="divide-y divide-slate-100 text-sm">
+                            {sortedData.length > 0 ? (
+                                sortedData.map((details) => (
+                                    <tr key={details._id} className="hover:bg-slate-50/60 transition-colors duration-150">
+                                        <td className="px-6 py-3.5 text-left">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold shadow-2xs select-none bg-blue-100 text-blue-600">
+                                                    <FontAwesomeIcon icon={faCalendarAlt} className="text-sm" />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="font-semibold text-slate-800 tracking-normal text-sm">
+                                                        {formatDate(details.leaveFromDate)} - {formatDate(details.leaveToDate)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td className="px-6 py-3.5 text-center text-sm text-slate-700 font-medium">
+                                            {details.reason || 'No reason provided'}
+                                        </td>
+
+                                        <td className="px-6 py-3.5 text-center whitespace-nowrap">
+                                            <div className="inline-flex items-center gap-2">
                                                 <button
                                                     onClick={() => handleEdit(details)}
-                                                    className="cursor-pointer bg-blue-500 text-white w-full p-2 flex items-center rounded justify-center"
+                                                    className="cursor-pointer inline-flex items-center gap-1.5 bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 border border-transparent shadow-2xs"
                                                 >
-                                                    <FontAwesomeIcon icon={faEdit} className="mr-2" /> <span>Edit</span>
+                                                    <FontAwesomeIcon icon={faEdit} className="text-[11px]" />
+                                                    <span>Edit</span>
                                                 </button>
-                                            </td>
-                                            <td className="border border-gray-300 w-[15%] py-2 px-2 whitespace-nowrap">
                                                 <button
                                                     onClick={() => handleDelete(details._id)}
-                                                    className="cursor-pointer bg-red-500 text-white w-full p-2 flex items-center rounded justify-center"
+                                                    className="cursor-pointer inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-600 text-red-500 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 border border-transparent shadow-2xs"
                                                 >
-                                                    <FontAwesomeIcon icon={faTrash} className="mr-2" /> <span>Delete</span>
+                                                    <FontAwesomeIcon icon={faTrash} className="text-[11px]" />
+                                                    <span>Delete</span>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
                             ) : (
                                 <tr>
-                                    <td colSpan={5} className="py-4 text-gray-500 text-center">No leave found.</td>
+                                    <td colSpan={3} className="py-12 text-center text-slate-400 font-medium tracking-normal">
+                                        No leave records found.
+                                    </td>
                                 </tr>
                             )}
                         </tbody>
-
                     </table>
                 </div>
             )}
-            {isEditPopupOpen && <EditPopup
-                onClose={() => { setIsEditModalOpen(false); fetchData(`${apiUrl}/api/leave/leaveInfo`) }}
-                selectedLeave={selectedLeave}
-            />}
-            {isDeletePopupOpen && <DeletePopup
-                onClose={() => { setIsDeleteModalOpen(false); fetchData(`${apiUrl}/api/leave/leaveInfo`) }}
-                selectedLeave={selectedLeave} 
-            />}
+
+            {isEditPopupOpen && (
+                <EditPopup
+                    onClose={() => {
+                        setIsEditModalOpen(false);
+                        fetchData(`${apiUrl}/api/leave/leaveInfo`);
+                    }}
+                    selectedLeave={selectedLeave}
+                />
+            )}
+            {isDeletePopupOpen && (
+                <DeletePopup
+                    onClose={() => {
+                        setIsDeleteModalOpen(false);
+                        fetchData(`${apiUrl}/api/leave/leaveInfo`);
+                    }}
+                    selectedLeave={selectedLeave}
+                />
+            )}
         </>
-    )
+    );
 }
 
 export default LeaveTable;
